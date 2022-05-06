@@ -15,13 +15,14 @@ route.post("/feedback", async (req, res) => {
     const nodeMail = new NodeMailerAdapter
     const submitNewFeedback = new SubmitFeedbackCase(prismaRepository, nodeMail) 
 
-    await submitNewFeedback.execute({
+    let newFeedback = await submitNewFeedback.execute({
         type,
         comment,
         screenshot
     })
+    console.log(newFeedback)
 
 
 
-    return res.status(201).json("OK")
+    return res.status(201).json({message: "Feedback created successfuly", data: newFeedback})
 })

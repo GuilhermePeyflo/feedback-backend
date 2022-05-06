@@ -21,7 +21,7 @@ export class SubmitFeedbackCase {
             throw new Error("Type is Required")
         }
 
-        await this.feedbackRepository.create({
+        let newFeedback = await this.feedbackRepository.create({
             type,
             comment,
             screenshot
@@ -36,6 +36,8 @@ export class SubmitFeedbackCase {
                 `<p>Comentário do Feedback: ${comment}</p>`,
             ].join("\n")
         })
+
+        return newFeedback
     }
 
 }
